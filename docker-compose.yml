@@ -1,0 +1,15 @@
+
+services:
+  sts:
+    build: .
+    container_name: sts-container
+    ports:
+      - "6901:6901" # NoVNC (Browser access)
+      - "5901:5901" # VNC standard port
+    environment:
+      - VNC_PW=headless
+      - VNC_RESOLUTION=1920x1080
+    shm_size: "1gb" # Required for GUI applications to prevent crashing
+    volumes:
+      - ./workspace:/home/headless/workspace # Persist your workspace
+    restart: unless-stopped
